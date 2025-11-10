@@ -24,28 +24,28 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        // // Password validation
-        // if (password.length < 6) {
+        // Password validation
+        if (password.length < 6) {
             
-        //     toast.error('Length must be at least 6 characters');
-        //     return;
-        // }
+            toast.error('Length must be at least 6 characters');
+            return;
+        }
 
-        // if (!/[A-Z]/.test(password)) {
-        //     toast.error('Must have an Uppercase letter in the password');
-        //     return;
-        // }
+        if (!/[A-Z]/.test(password)) {
+            toast.error('Must have an Uppercase letter in the password');
+            return;
+        }
 
-        // if (!/[a-z]/.test(password)) {
-        //     toast.error('Must have a Lowercase letter in the password');
-        //     return;
-        // }
+        if (!/[a-z]/.test(password)) {
+            toast.error('Must have a Lowercase letter in the password');
+            return;
+        }
 
-        // // Name validation
-        // if (!name.trim()) {
-        //     toast.error('Please enter your name');
-        //     return;
-        // }
+        // Name validation
+        if (!name.trim()) {
+            toast.error('Please enter your name');
+            return;
+        }
 
         createUser(email, password)
             .then(result => {

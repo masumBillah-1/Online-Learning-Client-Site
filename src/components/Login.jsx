@@ -25,7 +25,7 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-     // ✅ Password validation with toast
+     //  Password validation with toast
     if (password.length < 6) {
       toast.error('Password must be at least 6 characters long');
       return;
@@ -41,7 +41,7 @@ const Login = () => {
       return;
     }
 
-    // ✅ Sign in
+    //  Sign in
     signInUser(email, password)
       .then((result) => {
         console.log(result.user);
@@ -52,7 +52,7 @@ const Login = () => {
       .catch((error) => {
         console.log(error);
 
-        // ✅ Toast-based error handling
+        //  Toast-based error handling
         if (error.code === 'auth/invalid-credential') {
           toast.error('Invalid email or password.');
         } else if (error.code === 'auth/user-not-found') {
