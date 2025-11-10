@@ -1,13 +1,19 @@
 import React from 'react';
+import Banner from '../components/Banner';
 
 const Homepage = () => {
     return (
-        <div>
+        <>
 
 
-            <h2 className='mt-20'>This is HomePage</h2>
+
+            <Banner></Banner>
+
+
+
+
             
-        </div>
+        </>
     );
 };
 
