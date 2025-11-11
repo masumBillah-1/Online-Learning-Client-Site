@@ -7,7 +7,7 @@ const Banner = () => {
   return (
     <section className="">
       {/* Background Gradient */}
-      <div className="bg-gradient-to-br from-blue-900 to-black py-30">
+      <div className="bg-linear-to-br from-blue-900 to-black py-30">
         {/* Center Content */}
         <div className="flex flex-col lg:flex-row items-center justify-center gap-20 px-6">
           
@@ -36,8 +36,21 @@ const Banner = () => {
           <motion.div
             className="w-72 h-72 rounded-2xl shadow-lg bg-white overflow-hidden flex flex-col justify-start"
             initial={{ opacity: 0, scale: 0.8, y: 50 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4, ease: 'easeOut' }}
+            animate={{ 
+              opacity: 1, 
+              scale: 1, 
+              y: [0, -15, 0]
+            }}
+            transition={{ 
+              opacity: { duration: 1, delay: 0.4, ease: 'easeOut' },
+              scale: { duration: 1, delay: 0.4, ease: 'easeOut' },
+              y: { 
+                duration: 3, 
+                delay: 1.4,
+                ease: 'easeInOut',
+                repeat: Infinity
+              }
+            }}
           >
             <img
               src={bannerimg}

@@ -3,6 +3,9 @@ import Root from "../Layout/Root";
 import Homepage from "../Pages/Homepage";
 import AllCourses from "../Pages/AllCourses";
 import Dashboard from "../Pages/Dashboard";
+import Overview from "../Pages/Overview";
+import MyCourses from "../Pages/MyCourses";
+import Students from "../Pages/Students";
 import Login from "../components/Login";
 import Register from "../components/Register";
 
@@ -23,6 +26,18 @@ const router = createBrowserRouter([
         {
           path: '/dashboard',
           Component: Dashboard
+        },
+        {
+          path: '/dashboard/overview',
+          Component: Overview
+        },
+        {
+          path: '/dashboard/mycourses',
+          Component: MyCourses
+        },
+        {
+          path: '/dashboard/students',
+          Component: Students
         },
         {
           path:"/login",
