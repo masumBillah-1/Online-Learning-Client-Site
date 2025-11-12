@@ -130,7 +130,7 @@ const AllCourses = () => {
                     </div>
                     <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
                         Discover Our
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1a3689] to-[#632EE3]"> Popular Courses</span>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#193485] to-[#0b1d4b]"> Popular Courses</span>
                     </h2>
                     <p className="text-gray-600 text-lg max-w-2xl mx-auto">
                         Choose from hundreds of courses with new additions published every month
@@ -148,7 +148,7 @@ const AllCourses = () => {
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 placeholder="Search courses, instructors..."
-                                className="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:outline-none transition-colors"
+                                className="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#193485] focus:outline-none transition-colors"
                             />
                         </div>
 
@@ -161,7 +161,7 @@ const AllCourses = () => {
                                     onClick={() => setSelectedCategory(category)}
                                     className={`px-4 py-2 rounded-lg font-semibold text-sm whitespace-nowrap transition-all ${
                                         selectedCategory === category
-                                            ? 'bg-gradient-to-r from-[#1a3689] to-[#632EE3] text-white shadow-lg'
+                                            ? 'bg-gradient-to-r from-[#193485] to-[#0b1d4b] text-white shadow-lg'
                                             : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                                     }`}
                                 >
@@ -211,7 +211,7 @@ const AllCourses = () => {
 
                                 {/* Category */}
                                 <div className="absolute bottom-4 left-4">
-                                    <span className="bg-blue-500/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-semibold">
+                                    <span className="bg-[#193485]/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-semibold">
                                         {course.category}
                                     </span>
                                 </div>
@@ -220,7 +220,7 @@ const AllCourses = () => {
                             {/* Course Info */}
                             <div className="p-6">
                                 {/* Title */}
-                                <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-[#1a3689] transition-colors">
+                                <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-[#193485] transition-colors">
                                     {course.title}
                                 </h3>
 
@@ -257,7 +257,7 @@ const AllCourses = () => {
                                         <span className="text-2xl font-bold text-gray-900">${course.price}</span>
                                         <span className="text-sm text-gray-400 line-through ml-2">${course.originalPrice}</span>
                                     </div>
-                                    <button className="bg-gradient-to-r from-[#1a3689] to-[#632EE3] text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all">
+                                    <button className="bg-gradient-to-r from-[#193485] to-[#0b1d4b] text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all">
                                         Enroll Now
                                     </button>
                                 </div>
@@ -269,7 +269,7 @@ const AllCourses = () => {
                 {/* Load More Button */}
                 {filteredCourses.length > 0 && (
                     <div className="text-center mt-12">
-                        <button className="bg-white text-[#1a3689] border-2 border-[#1a3689] px-8 py-3 rounded-xl font-bold hover:bg-[#1a3689] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl">
+                        <button className="bg-white text-[#193485] border-2 border-[#193485] px-8 py-3 rounded-xl font-bold hover:bg-[#193485] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl">
                             Load More Courses
                         </button>
                     </div>
