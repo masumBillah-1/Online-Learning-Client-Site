@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import ThemeToggle from '../components/ThemeToggle';
 import { motion } from 'framer-motion';
 import { AuthContext } from '../context/AuthContext';
+import AddCourse from './AddCourse';
 
 const stats = [
   { id: 1, label: 'Total Courses', value: 24 },
@@ -121,9 +122,100 @@ const Dashboard = () => {
           <div className="flex items-center gap-3">
             <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
             <button className={`btn btn-ghost btn-sm ${textColor}`}>Help</button>
-            <button className="btn btn-primary btn-sm">Create Course</button>
+
+            {/* Create Course Button */}
+            <button
+              className="btn btn-primary btn-sm"
+              onClick={() => document.getElementById('create_course_modal').showModal()}
+            >
+              Create Course
+            </button>
           </div>
         </div>
+
+        {/* Modal */}
+        {/* <dialog id="create_course_modal" className="modal">
+          <div className="modal-box w-11/12 max-w-3xl">
+            <h3 className="font-bold text-lg mb-4">Add New Course</h3>
+
+            {/* AddCourse form component */}
+            {/* <AddCourse/> */}
+
+            {/* <div className="modal-action">
+              <form method="dialog">
+                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                <button className="btn btn-sm">Close</button>
+              </form>
+            </div>
+          </div>
+        </dialog> */} 
+
+          <dialog id="create_course_modal" className="modal">
+            <div className="modal-box w-11/12 max-w-5xl">
+              <form method="dialog">
+                {/* if there is a button in form, it will close the modal */}
+                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+
+                
+              </form>
+
+              <form className='w-10/12 mx-auto'>
+                <h2 className='text-4xl font-bold text-center'>Add New Course</h2>
+                <div className='space-x-2 p-5'>
+
+                  {/* <label className="label">Title</label>
+                            <input 
+                                type="text"
+                                className="input" 
+                                name='title'
+                                placeholder="Title"
+                                required
+                            /> */}
+                  <fieldset className="fieldset">
+                   <div className='grid grid-cols-2 gap-5'>
+
+                    <div>
+                       <legend className="fieldset-legend">Courses Title</legend>
+                    <input type="text" className="input w-full" placeholder="Type here" />
+                   </div>
+
+
+
+
+                  <div>
+                    <legend className="fieldset-legend">Course Category </legend>
+                  <select defaultValue="Pick a browser" className="select">
+                    <option disabled={true}>Select Courses</option>
+                    <option>Graphic Design</option>
+                    <option>Web Development</option>
+                    <option>Digital Marketing</option>
+                    <option>UI/UX Design</option>
+                    <option>Video Editing</option>
+                    <option>App Development</option>
+                    <option>Photography</option>
+                    <option>Animation</option>
+                    <option>Data Science</option>
+                    <option> </option>
+                    <option> </option>
+                    <option> </option>
+                 
+                    
+
+                  </select>
+                  </div>
+
+
+
+                   </div>
+
+                </fieldset>
+
+                </div>
+              </form>
+            </div>
+          </dialog>
+
+
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Sidebar */}
@@ -166,7 +258,6 @@ const Dashboard = () => {
                 <div className="flex items-center justify-between mb-3">
                   <h2 className={`text-lg font-semibold ${textColor}`}>My Courses</h2>
                 </div>
-
                 {/* Tabs */}
                 <Tabs theme={theme} />
               </div>

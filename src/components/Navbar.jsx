@@ -29,6 +29,7 @@ const Navbar = () => {
   const menuLinks = [
     { name: 'Home', path: '/', icon: Home },
     { name: 'Courses', path: '/allcourses', icon: BookOpen },
+    { name: 'Add Courses', path: '/addcourses', icon: BookOpen },
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard, 
     //     children: [
     //   { name: 'Overview', path: '/dashboard/overview' },

@@ -8,6 +8,7 @@ import MyCourses from "../Pages/MyCourses";
 import Students from "../Pages/Students";
 import Login from "../components/Login";
 import Register from "../components/Register";
+import AddCourse from "../Pages/AddCourse";
 
 
 const router = createBrowserRouter([
@@ -30,6 +31,14 @@ const router = createBrowserRouter([
         {
           path: '/dashboard/overview',
           Component: Overview
+        },
+        {
+          path: '/dashboard/mycourses',
+          Component: MyCourses
+        },
+        {
+          path: '/addcourses',
+          Component: AddCourse
         },
         {
           path: '/dashboard/mycourses',

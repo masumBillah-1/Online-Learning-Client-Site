@@ -4,6 +4,7 @@ import PopularCourses from './PopularCourses';
 import WhyChooseUs from './WhyChooseUs';
 import TopInstructors from './TopInstructors';
 import FeaturedCourses from './FeaturedCourses';
+import Testimonials from '../components/Testimonials';
 
 const Homepage = () => {
     return (
@@ -17,6 +18,7 @@ const Homepage = () => {
             <WhyChooseUs></WhyChooseUs>
 
             <FeaturedCourses></FeaturedCourses>
+            <Testimonials></Testimonials>
             <TopInstructors></TopInstructors>
 
 
