@@ -3,6 +3,7 @@ import Banner from '../components/Banner';
 import PopularCourses from './PopularCourses';
 import WhyChooseUs from './WhyChooseUs';
 import TopInstructors from './TopInstructors';
+import FeaturedCourses from './FeaturedCourses';
 
 const Homepage = () => {
     return (
@@ -14,6 +15,8 @@ const Homepage = () => {
             <PopularCourses></PopularCourses>
 
             <WhyChooseUs></WhyChooseUs>
+
+            <FeaturedCourses></FeaturedCourses>
             <TopInstructors></TopInstructors>
 
 

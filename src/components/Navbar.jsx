@@ -129,7 +129,7 @@ const Navbar = () => {
               <div className="relative">
                 <button
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
-                  className={`w-10 h-10 rounded-full overflow-hidden border-2 ${borderColor} hover:border-[#632EE3] transition-all duration-200`}
+                  className={`w-10 h-10 rounded-full overflow-hidden border-2 cursor-pointer ${borderColor} hover:border-[#632EE3] transition-all duration-200`}
                 >
                   {user.photoURL ? (
                     <img src={user.photoURL} alt="User Avatar" className="w-full h-full object-cover" />
@@ -153,7 +153,7 @@ const Navbar = () => {
                       </button>
                       <button
                         onClick={handleSignOut}
-                        className={`w-full flex items-center gap-3 px-4 py-2 rounded-lg ${theme === 'light' ? 'text-red-600 hover:bg-red-50' : 'text-red-400 hover:bg-red-500/10'} transition-all`}
+                        className={`w-full flex items-center gap-3 px-4 py-2 rounded-lg cursor-pointer ${theme === 'light' ? 'text-red-600 hover:bg-red-50' : 'text-red-400 hover:bg-red-500/10'} transition-all`}
                       >
                         <LogOut size={18} /> Sign Out
                       </button>
