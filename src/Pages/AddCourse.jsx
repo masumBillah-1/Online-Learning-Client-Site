@@ -51,6 +51,7 @@ const AddCourse = () => {
 
   return (
     <div className="py-20">
+      <title>Add Course</title>
         <div className="max-w-3xl mx-auto p-8 bg-white rounded-2xl shadow-xl mt-10">
       {/* Toaster Component */}
       <Toaster 

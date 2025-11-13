@@ -140,7 +140,7 @@ const Register = () => {
 
   return (
     <div className="grid lg:grid-cols-2 grid-cols-1 min-h-screen py-15">
-
+        <title>Register</title>
       <Toaster 
           position="top-right" 
           reverseOrder={false}

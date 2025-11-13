@@ -115,6 +115,7 @@ const Dashboard = () => {
 
   return (
     <div className={`min-h-screen ${bgColor} pt-20 pb-10 ${textColor}`}>
+      <title>Dashboard</title>
       <div className="w-11/12 mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">

@@ -32,6 +32,7 @@ const AllCourses = () => {
 
     return (
         <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+            <title>All Courses</title>
             <div className="w-11/12 mx-auto px-4">
                 {/* Header */}
                 <div className="text-center mb-12">

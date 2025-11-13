@@ -100,6 +100,7 @@ const Login = () => {
 
   return (
     <div className="grid lg:grid-cols-2 grid-cols-1 min-h-screen pt-10">
+      <title>Login </title>
 
       <Toaster 
           position="top-right" 

@@ -12,6 +12,7 @@ import AddCourse from "../Pages/AddCourse";
 import CoursesDetails from "../Pages/CoursesDetails";
 import CertificateDownload from "../Pages/CertificateDownload";
 import PrivateRoutes from "./PrivateRoutes";
+import ErrorPage from "../Pages/ErrorPage";
 
 
 const router = createBrowserRouter([
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
           path:"/register",
           Component: Register
 
+        },
+        {
+          path: "*",
+          Component: ErrorPage
         }
 
     ]

@@ -19,6 +19,8 @@ const Homepage = () => {
     return (
         <>
 
+        <title>EduWave - Home</title>
+
 
 
             <Banner></Banner>
