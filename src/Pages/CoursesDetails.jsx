@@ -1,12 +1,16 @@
-import React, { use, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { Link, useLoaderData, useParams } from 'react-router';
+import { AuthContext } from '../context/AuthContext';
+import Swal from 'sweetalert2';
 
 const CoursesDetails = () => {
     const { id } = useParams();
     const allcourses = useLoaderData();
-    const {user} = use()
-    const singlecourse = allcourses.find(app => app._id === id);
+    const {user} = useContext(AuthContext)
     const [showFullDescription, setShowFullDescription] = useState(false);
+    const courseModelRef = useRef(null)
+
+    const singlecourse = allcourses.find(app => app._id === id);
 
     if (!singlecourse) {
         return <div className="text-center py-20">Course not found</div>;
@@ -45,9 +49,68 @@ const CoursesDetails = () => {
         { title: "Search Engine Optimization SEO (Update 3.0)", duration: "1h 30m" },
         { title: "Chat Integration (Update 3.0)", duration: "40 Min" },
         { title: "Ecommerce and analytics (Update 3.0)", duration: "55 Min" },
-        { title: "Website Speed Optimization (Update 3.0)", duration: "1h 10m" }
     ];
 
+    console.log(user)
+
+
+    const handelCourseModelOpen =()=> {
+
+
+        courseModelRef.current.showModal()
+
+    }
+
+
+const handleCoursePurchase = (e) => {
+  e.preventDefault();
+
+  const name = e.target.name.value;
+  const email = e.target.email.value;
+  const price = e.target.price.value;
+
+  const courseData = {
+    courseid: singlecourse._id,
+    user_name: name,
+    user_email: email,
+    price: price
+  };
+
+  fetch('http://localhost:4000/purchases', {
+    method: "POST",
+    headers: {
+      'content-type': 'application/json' 
+    },
+    body: JSON.stringify(courseData)
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log("After Courses Data", data);
+
+    // 🟢 Swal.fire দেখানো হবে
+    Swal.fire({
+      title: "Success!",
+      text: "Course purchased successfully.",
+      icon: "success",
+      confirmButtonText: "OK"
+    });
+
+    // Modal close
+    courseModelRef.current.close();
+  })
+  .catch(err => {
+    console.error(err);
+    Swal.fire({
+      title: "Error!",
+      text: "Something went wrong. Please try again.",
+      icon: "error",
+      confirmButtonText: "OK"
+    });
+  });
+
+  console.log(name, email, price, singlecourse._id);
+};
+    
     return (
         <div className='' style={{background: 'linear-gradient(to right, #0a1c4a, #193485)'}}>
             <div className="w-10/12 mx-auto py-20">
@@ -107,13 +170,102 @@ const CoursesDetails = () => {
                                     </div>
                                 </div>
 
-                                <button className="w-full text-white py-3 rounded-lg font-semibold hover:opacity-90 transition mb-3" style={{background: 'linear-gradient(to right, #193485, #0a1c4a)'}}>
+                                <button className="w-full text-white py-3 rounded-lg font-semibold hover:opacity-90 transition mb-3 cursor-pointer" style={{background: 'linear-gradient(to right, #193485, #0a1c4a)'}} onClick={handelCourseModelOpen}>
                                     Enroll Now
                                 </button>
+{/* onClick={()=>document.getElementById('my_modal_2').showModal()} */}
+
+
+                                {/* dilogbox  */}
+
+
+                                {/* Open the modal using document.getElementById('ID').showModal() method */}
+                                {/* <button className="btn" onClick={()=>document.getElementById('my_modal_2').showModal()}>open modal</button> */}
+              <dialog ref={courseModelRef} id="my_modal_2" className="modal">
+  <div className="modal-box bg-white dark:bg-gray-900 text-black dark:text-white rounded-2xl shadow-lg p-6">
+    <h3 className="font-bold text-2xl text-center mb-4">
+      🎓 Course Purchase
+    </h3>
+
+    <form onSubmit={handleCoursePurchase} className="space-y-4">
+      <fieldset className="fieldset space-y-3">
+        {/* Course Info */}
+        <h1 className="text-lg font-semibold">{singlecourse.title}</h1>
+        <h2 className="text-sm text-gray-600 dark:text-gray-300">{singlecourse.category}</h2>
+
+        {/* <div className="text-4xl font-bold mb-2" style={{color: '#0a1c4a'}}>
+         ৳{singlecourse.price?.discounted || singlecourse.price}
+         </div> */}
+
+        {/* User Info */}
+        <label className="label">
+          <span className="label-text">Name</span>
+        </label>
+        <input
+          type="text" name='name'
+          className="input input-bordered w-full bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
+          defaultValue={user?.displayName}
+          readOnly
+        />
+
+        <label className="label">
+          <span className="label-text">Email</span>
+        </label>
+        <input
+          type="email" name='email'
+          className="input input-bordered w-full bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
+          defaultValue={user?.email}
+          readOnly
+        />
+        <div className='flex gap-5'>
+
+            <div>
+                <label className="label">
+          <span className="label-text">Course Price</span>
+        </label>
+        <input
+          type="text"
+          className="input input-bordered w-full bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
+        defaultValue={` ৳${singlecourse.price?.discounted || singlecourse.price}`}
+          readOnly
+        />
+            </div>
+            <div>
+                <label className="label">
+          <span className="label-text">Amount Price</span>
+        </label>
+        <input
+          type="number" name='price'
+          className="input input-bordered w-full bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
+            placeholder='Please Amount'
+        />
+
+            </div>
+
+
+
+        </div>
+
+        {/* Purchase Button */}
+        <button className="btn btn-primary w-full mt-4">Purchase</button>
+      </fieldset>
+    </form>
+  </div>
+
+  {/* Modal Backdrop / Close */}
+  <form method="dialog" className="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
+
+
+
+
+
+
+
                                 
-                                <button className="w-full py-3 rounded-lg font-semibold transition" style={{border: '2px solid #193485', color: '#193485'}} onMouseEnter={(e) => e.target.style.backgroundColor = '#f0f5ff'} onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>
-                                    Add to Cart
-                                </button>
+                                
 
                                 <div className="mt-6 space-y-3 text-sm">
                                     <div className="flex justify-between">

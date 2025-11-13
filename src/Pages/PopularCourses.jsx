@@ -1,6 +1,7 @@
 import React from "react";
 import { BookOpen, Code, TrendingUp, Palette, Video, Smartphone, ArrowRight } from "lucide-react";
 import CourseCard from "../components/CourseCard";
+import { Link } from "react-router";
 
 const PopularCourses = ({coursedata}) => {
 
@@ -94,9 +95,9 @@ const PopularCourses = ({coursedata}) => {
 
         {/* Bottom CTA */}
         <div className="text-center mt-16">
-          <button className="bg-white text-[#193485] px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+          <Link to={'/allcourses'} className="bg-white text-[#193485] px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
             View All Courses
-          </button>
+          </Link>
         </div>
       </div>
     </section>
