@@ -31,7 +31,9 @@ const router = createBrowserRouter([
         },
         {
           path: '/dashboard',
-          Component: Dashboard
+          element: <PrivateRoutes>
+            <Dashboard/>
+          </PrivateRoutes>
         },
         {
           path: '/dashboard/overview',
@@ -44,7 +46,7 @@ const router = createBrowserRouter([
         {
           path: '/addcourses',
           element:<PrivateRoutes>
-            <AddCourse></AddCourse>
+            <AddCourse/>
 
           </PrivateRoutes>
           
@@ -58,14 +60,14 @@ const router = createBrowserRouter([
           path: '/details/:id',
           loader: ()=> fetch('http://localhost:4000/courses'),
           element: <PrivateRoutes>
-            <CoursesDetails></CoursesDetails>
+            <CoursesDetails/>
           </PrivateRoutes>
           
         },
         {
-          path: '/dashboard/mycourses',
+          path: '/mycourses',
           element: <PrivateRoutes>
-            <MyCourses></MyCourses>
+            <MyCourses/>
           </PrivateRoutes>
         },
         {

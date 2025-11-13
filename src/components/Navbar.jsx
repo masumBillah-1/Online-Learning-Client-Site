@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import lightlogo from '../assets/logoblue.png';
 import darklogo from '../assets/logoWhite.png';
 import { AuthContext } from '../context/AuthContext';
-import { UserRound, Sun, Moon, Home, BookOpen, LayoutDashboard, Settings, LogOut } from 'lucide-react';
+import { UserRound, Sun, Moon, Home, BookOpen, LayoutDashboard, Settings, LogOut, Plus } from 'lucide-react';
 
 const Navbar = () => {
   const { user, SignOutUser } = useContext(AuthContext);
@@ -27,17 +27,15 @@ const Navbar = () => {
   const handleThemeToggle = () => setTheme(theme === 'light' ? 'dark' : 'light');
 
   const menuLinks = [
-    { name: 'Home', path: '/', icon: Home },
-    { name: 'Courses', path: '/allcourses', icon: BookOpen },
-    { name: 'Add Courses', path: '/addcourses', icon: BookOpen },
-    { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard, 
-    //     children: [
-    //   { name: 'Overview', path: '/dashboard/overview' },
-    //   { name: 'My Courses', path: '/dashboard/mycourses' },
-    //   { name: 'Students', path: '/dashboard/students' },
-    // ] 
-},
-  ];
+  { name: 'Home', path: '/', icon: Home },
+  { name: 'Courses', path: "/allcourses", icon: BookOpen },
+  // Conditional menu items - only show if user is logged in
+  ...(user ? [
+    { name: 'My Courses', path: '/mycourses', icon: BookOpen },
+    { name: 'Add Courses', path: '/addcourses', icon: Plus },
+  ] : []),
+  { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
+];
 
   // Theme-based classes
   const textColor = theme === 'light' ? 'text-gray-800' : 'text-white';
@@ -62,13 +60,13 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
 
           {/* Logo */}
-          <div className="flex items-center gap-3">
+          <Link to={'/'} className="flex items-center gap-3">
             <img src={theme === 'light' ? lightlogo : darklogo} alt="EduWave Logo" className="w-10" />
             <span className={`font-bold text-2xl ${textColor}`}>
               Edu
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#632EE3] to-[#9F62F2]">Wave</span>
             </span>
-          </div>
+          </Link>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-2">
@@ -84,7 +82,7 @@ const Navbar = () => {
                       <svg className={`ml-1 h-3 w-3 ${textColor}`} viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clipRule="evenodd" />
                       </svg>
-
+                    </button>
                     <div className="absolute left-0 mt-2 w-44 bg-white dark:bg-[#193485] rounded-lg shadow-lg border border-gray-100 dark:border-white/10 opacity-0 group-hover:opacity-100 transform scale-95 group-hover:scale-100 transition-all duration-150 pointer-events-none group-hover:pointer-events-auto">
                         <ul className="p-2">
                           {link.children.map((child) => (
@@ -96,7 +94,6 @@ const Navbar = () => {
                           ))}
                         </ul>
                       </div>
-                    </button>
                   </div>
                 );
               }
