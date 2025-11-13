@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { useLoaderData, useParams } from 'react-router';
+import React, { use, useState } from 'react';
+import { Link, useLoaderData, useParams } from 'react-router';
 
 const CoursesDetails = () => {
     const { id } = useParams();
     const allcourses = useLoaderData();
+    const {user} = use()
     const singlecourse = allcourses.find(app => app._id === id);
     const [showFullDescription, setShowFullDescription] = useState(false);
 
@@ -48,11 +49,10 @@ const CoursesDetails = () => {
     ];
 
     return (
-        <div className="bg-gray-50" style={{background: 'linear-gradient(to right, #0a1c4a, #193485)'}}>
-
-            <div className="text-white w-10/12 mx-auto  py-20" >
+        <div className='' style={{background: 'linear-gradient(to right, #0a1c4a, #193485)'}}>
+            <div className="w-10/12 mx-auto py-20">
             {/* Header Section */}
-            <div  >
+            <div className="text-white" >
                 <div className="max-w-7xl mx-auto px-4 py-8">
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                         {/* Left Content */}
@@ -277,18 +277,20 @@ const CoursesDetails = () => {
                         </div>
 
                         {/* Certificate Card */}
-                        <div className="rounded-lg shadow p-6 text-white" style={{background: 'linear-gradient(135deg, #193485, #0a1c4a)'}}>
-                            <h3 className="text-xl font-bold mb-3">Course Certificate</h3>
-                            <p className="text-sm mb-4" style={{color: '#c5d9ff'}}>
-                                Get a professional certificate upon course completion to showcase your skills.
-                            </p>
-                            <div className="rounded-lg p-4 backdrop-blur-sm" style={{backgroundColor: 'rgba(255, 255, 255, 0.2)'}}>
-                                <div className="text-center">
-                                    <div className="text-6xl mb-2">🎓</div>
-                                    <p className="text-sm">Certificate of Completion</p>
+                        <Link to={`/certificate/${singlecourse._id}`}>
+                            <div className="rounded-lg shadow p-6 text-white cursor-pointer hover:opacity-90 transition" style={{background: 'linear-gradient(135deg, #193485, #0a1c4a)'}}>
+                                <h3 className="text-xl font-bold mb-3">Course Certificate</h3>
+                                <p className="text-sm mb-4" style={{color: '#c5d9ff'}}>
+                                    Get a professional certificate upon course completion to showcase your skills.
+                                </p>
+                                <div className="rounded-lg p-4 backdrop-blur-sm" style={{backgroundColor: 'rgba(255, 255, 255, 0.2)'}}>
+                                    <div className="text-center">
+                                        <div className="text-6xl mb-2">🎓</div>
+                                        <p className="text-sm">Certificate of Completion</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -316,6 +318,8 @@ const CoursesDetails = () => {
                 </div>
             </div>
         </div>
+
+
 
 
 

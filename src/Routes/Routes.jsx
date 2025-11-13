@@ -10,6 +10,7 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 import AddCourse from "../Pages/AddCourse";
 import CoursesDetails from "../Pages/CoursesDetails";
+import CertificateDownload from "../Pages/CertificateDownload";
 
 
 const router = createBrowserRouter([
@@ -41,6 +42,11 @@ const router = createBrowserRouter([
         {
           path: '/addcourses',
           Component: AddCourse
+        },
+        {
+          path: '/certificate/:id',
+          loader: ()=> fetch('http://localhost:4000/courses'),
+          Component: CertificateDownload
         },
         {
           path: '/details/:id',
