@@ -11,6 +11,7 @@ import Register from "../components/Register";
 import AddCourse from "../Pages/AddCourse";
 import CoursesDetails from "../Pages/CoursesDetails";
 import CertificateDownload from "../Pages/CertificateDownload";
+import PrivateRoutes from "./PrivateRoutes";
 
 
 const router = createBrowserRouter([
@@ -42,7 +43,11 @@ const router = createBrowserRouter([
         },
         {
           path: '/addcourses',
-          Component: AddCourse
+          element:<PrivateRoutes>
+            <AddCourse></AddCourse>
+
+          </PrivateRoutes>
+          
         },
         {
           path: '/certificate/:id',
@@ -52,12 +57,16 @@ const router = createBrowserRouter([
         {
           path: '/details/:id',
           loader: ()=> fetch('http://localhost:4000/courses'),
-          Component: CoursesDetails
+          element: <PrivateRoutes>
+            <CoursesDetails></CoursesDetails>
+          </PrivateRoutes>
           
         },
         {
           path: '/dashboard/mycourses',
-          Component: MyCourses
+          element: <PrivateRoutes>
+            <MyCourses></MyCourses>
+          </PrivateRoutes>
         },
         {
           path: '/dashboard/students',

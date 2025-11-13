@@ -1,5 +1,6 @@
 import React from 'react';
 import { CircleArrowRight, Star, Users, BookOpen, TrendingUp } from 'lucide-react';
+import { Link } from 'react-router';
 
 const Banner = () => {
   return (
@@ -69,16 +70,16 @@ const Banner = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-              <button className="group bg-white text-[#1a3689] px-4 py-1 rounded-xl font-bold text-[16px] hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center gap-2">
+              <Link to={'/details/691538e6d3cae057dff36d12'} className="group bg-white text-[#1a3689] px-4 py-1 rounded-xl font-bold text-[16px] hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center gap-2">
                 Enroll Now
                 <CircleArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button className="bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white px-4 py-4 rounded-xl font-bold text-lg hover:bg-white/20 transition-all duration-300 flex items-center gap-2">
+              </Link>
+              <Link to={'/details/691538e6d3cae057dff36d12'} className="bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white px-4 py-4 rounded-xl font-bold text-lg hover:bg-white/20 transition-all duration-300 flex items-center gap-2">
                 Watch Preview
                 <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
                   <div className="w-0 h-0 border-t-4 border-t-transparent border-l-6 border-l-white border-b-4 border-b-transparent ml-0.5"></div>
                 </div>
-              </button>
+              </Link>
             </div>
 
             {/* Trust Indicators */}
@@ -119,9 +120,9 @@ const Banner = () => {
 
                   {/* Play Button */}
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform cursor-pointer">
+                    <Link to={'/details/691538e6d3cae057dff36d12'} className="w-16 h-16 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform cursor-pointer">
                       <div className="w-0 h-0 border-t-8 border-t-transparent border-l-12 border-l-[#1a3689] border-b-8 border-b-transparent ml-1"></div>
-                    </div>
+                    </Link>
                   </div>
                 </div>
 
