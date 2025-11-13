@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Star, Clock, Users, BookOpen, TrendingUp, Filter, Search } from 'lucide-react';
+import { Link, useLoaderData } from 'react-router';
 
 const AllCourses = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
@@ -7,103 +8,13 @@ const AllCourses = () => {
 
     const categories = ['All', 'Design', 'Development', 'Business', 'Marketing', 'Photography'];
 
-    const courses = [
-        {
-            id: 1,
-            title: 'Complete Graphic Design Masterclass',
-            category: 'Design',
-            instructor: 'John Smith',
-            rating: 4.9,
-            students: 25420,
-            duration: '12 weeks',
-            lessons: 50,
-            price: 149,
-            originalPrice: 299,
-            image: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&q=80',
-            badge: 'Bestseller',
-            level: 'Beginner'
-        },
-        {
-            id: 2,
-            title: 'Full Stack Web Development Bootcamp',
-            category: 'Development',
-            instructor: 'Sarah Johnson',
-            rating: 4.8,
-            students: 18350,
-            duration: '16 weeks',
-            lessons: 85,
-            price: 199,
-            originalPrice: 399,
-            image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80',
-            badge: 'Hot',
-            level: 'Intermediate'
-        },
-        {
-            id: 3,
-            title: 'Digital Marketing & SEO Complete Course',
-            category: 'Marketing',
-            instructor: 'Michael Brown',
-            rating: 4.7,
-            students: 15200,
-            duration: '10 weeks',
-            lessons: 45,
-            price: 129,
-            originalPrice: 249,
-            image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
-            badge: 'New',
-            level: 'Beginner'
-        },
-        {
-            id: 4,
-            title: 'UI/UX Design Fundamentals',
-            category: 'Design',
-            instructor: 'Emily Davis',
-            rating: 4.9,
-            students: 22100,
-            duration: '8 weeks',
-            lessons: 40,
-            price: 139,
-            originalPrice: 279,
-            image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80',
-            badge: 'Popular',
-            level: 'Beginner'
-        },
-        {
-            id: 5,
-            title: 'Business Strategy & Leadership',
-            category: 'Business',
-            instructor: 'David Wilson',
-            rating: 4.6,
-            students: 12800,
-            duration: '6 weeks',
-            lessons: 35,
-            price: 159,
-            originalPrice: 299,
-            image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80',
-            badge: 'Trending',
-            level: 'Advanced'
-        },
-        {
-            id: 6,
-            title: 'Professional Photography Course',
-            category: 'Photography',
-            instructor: 'Lisa Anderson',
-            rating: 4.8,
-            students: 16500,
-            duration: '10 weeks',
-            lessons: 55,
-            price: 169,
-            originalPrice: 329,
-            image: 'https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=800&q=80',
-            badge: 'Featured',
-            level: 'Intermediate'
-        }
-    ];
+    const courses = useLoaderData() || []; // ensure courses is always array
 
     const filteredCourses = courses.filter(course => {
         const matchesCategory = selectedCategory === 'All' || course.category === selectedCategory;
-        const matchesSearch = course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                            course.instructor.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesSearch =
+            course.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            course.instructor?.name?.toLowerCase().includes(searchQuery.toLowerCase());
         return matchesCategory && matchesSearch;
     });
 
@@ -140,7 +51,6 @@ const AllCourses = () => {
                 {/* Search & Filter Bar */}
                 <div className="bg-white rounded-2xl shadow-lg p-6 mb-10">
                     <div className="flex flex-col md:flex-row gap-4 items-center">
-                        {/* Search */}
                         <div className="relative flex-1 w-full">
                             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
                             <input
@@ -151,15 +61,13 @@ const AllCourses = () => {
                                 className="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-200 focus:border-[#193485] focus:outline-none transition-colors"
                             />
                         </div>
-
-                        {/* Category Filter */}
                         <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
                             <Filter className="text-gray-400 w-5 h-5 flex-shrink-0" />
                             {categories.map((category) => (
                                 <button
                                     key={category}
                                     onClick={() => setSelectedCategory(category)}
-                                    className={`px-4 py-2 rounded-lg font-semibold text-sm whitespace-nowrap transition-all ${
+                                    className={`px-4 py-2 rounded-lg font-semibold text-sm whitespace-nowrap transition-all cursor-pointer ${
                                         selectedCategory === category
                                             ? 'bg-gradient-to-r from-[#193485] to-[#0b1d4b] text-white shadow-lg'
                                             : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -183,59 +91,64 @@ const AllCourses = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {filteredCourses.map((course) => (
                         <div
-                            key={course.id}
+                            key={course._id || course.id}
                             className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group"
                         >
                             {/* Course Image */}
                             <div className="relative h-48 overflow-hidden">
                                 <img
-                                    src={course.image}
-                                    alt={course.title}
+                                    src={course.thumbnail || course.image}
+                                    alt={course.title || 'Course'}
                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                
+
                                 {/* Badge */}
-                                <div className="absolute top-4 left-4">
-                                    <span className={`${getBadgeColor(course.badge)} text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg`}>
-                                        {course.badge}
-                                    </span>
-                                </div>
+                                {course.tags?.[0] && (
+                                    <div className="absolute top-4 left-4">
+                                        <span className={`${getBadgeColor(course.tags[0])} text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg`}>
+                                            {course.tags[0]}
+                                        </span>
+                                    </div>
+                                )}
 
                                 {/* Level Badge */}
-                                <div className="absolute top-4 right-4">
-                                    <span className="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-1 rounded-full text-xs font-semibold">
-                                        {course.level}
-                                    </span>
-                                </div>
+                                {course.level && (
+                                    <div className="absolute top-4 right-4">
+                                        <p>{course._id }</p>
+                                        <span className="bg-white/90 backdrop-blur-sm text-gray-800 px-3 py-1 rounded-full text-xs font-semibold">
+                                            {course.level}
+                                        </span>
+                                    </div>
+                                )}
 
                                 {/* Category */}
-                                <div className="absolute bottom-4 left-4">
-                                    <span className="bg-[#193485]/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-semibold">
-                                        {course.category}
-                                    </span>
-                                </div>
+                                {course.category && (
+                                    <div className="absolute bottom-4 left-4">
+                                        <span className="bg-[#193485]/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-semibold">
+                                            {course.category}
+                                        </span>
+                                    </div>
+                                )}
                             </div>
 
                             {/* Course Info */}
                             <div className="p-6">
-                                {/* Title */}
                                 <h3 className="text-xl font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-[#193485] transition-colors">
-                                    {course.title}
+                                    {course.title || 'Untitled Course'}
                                 </h3>
 
-                                {/* Instructor */}
-                                <p className="text-sm text-gray-600 mb-4">By {course.instructor}</p>
+                                <p className="text-sm text-gray-600 mb-4">By {course.instructor?.name || 'Unknown Instructor'}</p>
 
                                 {/* Stats */}
                                 <div className="flex items-center gap-4 mb-4 text-sm text-gray-600">
                                     <div className="flex items-center gap-1">
                                         <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                                        <span className="font-semibold text-gray-900">{course.rating}</span>
+                                        <span className="font-semibold text-gray-900">{course.rating ?? 0}</span>
                                     </div>
                                     <div className="flex items-center gap-1">
                                         <Users className="w-4 h-4" />
-                                        <span>{course.students.toLocaleString()}</span>
+                                        <span>{course.students?.toLocaleString() ?? 0}</span>
                                     </div>
                                 </div>
 
@@ -243,37 +156,28 @@ const AllCourses = () => {
                                 <div className="flex items-center gap-4 mb-4 text-sm text-gray-600 pb-4 border-b border-gray-100">
                                     <div className="flex items-center gap-1">
                                         <Clock className="w-4 h-4" />
-                                        <span>{course.duration}</span>
+                                        <span>{course.duration || 'N/A'}</span>
                                     </div>
                                     <div className="flex items-center gap-1">
                                         <BookOpen className="w-4 h-4" />
-                                        <span>{course.lessons} lessons</span>
+                                        <span>{course.lessons ?? 0} lessons</span>
                                     </div>
                                 </div>
 
                                 {/* Price & CTA */}
                                 <div className="flex items-center justify-between">
                                     <div>
-                                        <span className="text-2xl font-bold text-gray-900">${course.price}</span>
-                                        <span className="text-sm text-gray-400 line-through ml-2">${course.originalPrice}</span>
+                                        <span className="text-2xl font-bold text-gray-900">${course.price?.discounted ?? 0}</span>
+                                        <span className="text-sm text-gray-400 line-through ml-2">${course.price?.original ?? 0}</span>
                                     </div>
-                                    <button className="bg-gradient-to-r from-[#193485] to-[#0b1d4b] text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all">
-                                        Enroll Now
-                                    </button>
+                                    <Link to={`/details/${course._id}`} className="bg-linear-to-r from-[#193485] to-[#0b1d4b] text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all">
+    Enroll Now
+</Link>
                                 </div>
                             </div>
                         </div>
                     ))}
                 </div>
-
-                {/* Load More Button */}
-                {filteredCourses.length > 0 && (
-                    <div className="text-center mt-12">
-                        <button className="bg-white text-[#193485] border-2 border-[#193485] px-8 py-3 rounded-xl font-bold hover:bg-[#193485] hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl">
-                            Load More Courses
-                        </button>
-                    </div>
-                )}
 
                 {/* No Results */}
                 {filteredCourses.length === 0 && (
