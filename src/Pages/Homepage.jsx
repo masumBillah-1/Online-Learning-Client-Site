@@ -5,15 +5,24 @@ import WhyChooseUs from './WhyChooseUs';
 import TopInstructors from './TopInstructors';
 import FeaturedCourses from './FeaturedCourses';
 import Testimonials from '../components/Testimonials';
+import { useLoaderData } from 'react-router';
 
 const Homepage = () => {
+
+
+    const coursedata = useLoaderData()
+
+
+
+
+
     return (
         <>
 
 
 
             <Banner></Banner>
-            <PopularCourses></PopularCourses>
+            <PopularCourses coursedata={coursedata}></PopularCourses>
 
             <WhyChooseUs></WhyChooseUs>
 

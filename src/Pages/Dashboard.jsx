@@ -184,7 +184,7 @@ const Dashboard = () => {
 
                   <div>
                     <legend className="fieldset-legend">Course Category </legend>
-                  <select defaultValue="Pick a browser" className="select">
+                  <select defaultValue="Pick a browser" className="select w-full">
                     <option disabled={true}>Select Courses</option>
                     <option>Graphic Design</option>
                     <option>Web Development</option>
@@ -207,6 +207,31 @@ const Dashboard = () => {
 
 
                    </div>
+
+
+                   <div className='grid grid-cols-5 gap-5'>
+
+                    <div className='col-span-1'>
+                       <legend className="fieldset-legend">Prize</legend>
+                    <input type="number" className="input w-full" placeholder="Type here" />
+                   </div>
+                    <div className='col-span-1'>
+                       <legend className="fieldset-legend">Rating</legend>
+                    <input type="number" className="input w-full" placeholder="Type here" />
+                   </div>
+                    <div className='col-span-3'>
+                       <legend className="fieldset-legend">Image URL</legend>
+                    <input type="url" className="input w-full" placeholder="URL" />
+                   </div>
+
+
+
+
+                   </div>
+
+
+
+
 
                 </fieldset>
 

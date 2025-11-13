@@ -9,6 +9,7 @@ import Students from "../Pages/Students";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import AddCourse from "../Pages/AddCourse";
+import CoursesDetails from "../Pages/CoursesDetails";
 
 
 const router = createBrowserRouter([
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
     children: [
         {
             index: true,
+            loader: ()=> fetch('http://localhost:4000/latest-courses'),
             Component: Homepage
         },
         {
@@ -39,6 +41,12 @@ const router = createBrowserRouter([
         {
           path: '/addcourses',
           Component: AddCourse
+        },
+        {
+          path: '/details/:id',
+          loader: ()=> fetch('http://localhost:4000/courses'),
+          Component: CoursesDetails
+          
         },
         {
           path: '/dashboard/mycourses',

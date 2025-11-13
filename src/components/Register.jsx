@@ -89,14 +89,36 @@ const Register = () => {
 
 
     const handleGoogleSignIn = () => {
-  signinWidthGoogle()
-    .then(() => {
-      toast.success('Login successful with Google!');
-      navigate(location?.state || '/');
-    })
-    .catch(() => {
-      toast.error('Failed to sign in with Google. Please try again.');
-    });
+          signinWidthGoogle()
+            .then(result => {
+
+           const   newUser = {
+                name: result.user.displayName,
+                email: result.user.email,
+                image: result.user.photoURL
+              }
+              // create user in the database
+              fetch('http://localhost:4000/users/', {
+
+                  method: 'POST',
+                  headers: {
+                    'content-type': 'application/json'
+                  },
+                  body: JSON.stringify(newUser)
+              })
+              .then(res=> res.json())
+              .then(data => {
+                console.log('data after save',data)
+              })
+
+
+
+              toast.success('Login successful with Google!');
+              navigate(location?.state || '/');
+            })
+            .catch(() => {
+              toast.error('Failed to sign in with Google. Please try again.');
+            });
 };
 
 
