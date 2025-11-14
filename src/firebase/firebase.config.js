@@ -1,20 +1,26 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
+import { initializeApp } from "firebase/app";
+
+import { getAuth } from "firebase/auth";
+
+
+// 🔍 Debug: Check if env variables are loading
+console.log("ENV Check:", {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  all: import.meta.env
+});
+
 const firebaseConfig = {
-  apiKey: "AIzaSyCeoxODWcApn_ozuyGCLgr-AqFogpSfVl0",
-  authDomain: "online-courses-platform-73ead.firebaseapp.com",
-  projectId: "online-courses-platform-73ead",
-  storageBucket: "online-courses-platform-73ead.firebasestorage.app",
-  messagingSenderId: "708580221215",
-  appId: "1:708580221215:web:0cd05789d911ce3b0a102a"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
-// Initialize Firebase
+console.log("Firebase Config:", firebaseConfig);
+
 const app = initializeApp(firebaseConfig);
-// Initialize Firebase Authentication and get a reference to the service
+
 export const auth = getAuth(app);
