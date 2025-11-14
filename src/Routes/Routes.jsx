@@ -22,12 +22,12 @@ const router = createBrowserRouter([
     children: [
         {
             index: true,
-            loader: ()=> fetch('http://localhost:4000/latest-courses'),
+            loader: ()=> fetch('https://online-learning-platform-server-sit.vercel.app/latest-courses'),
             Component: Homepage
         },
         {
           path:"/allcourses",
-          loader: ()=> fetch('http://localhost:4000/courses'),
+          loader: ()=> fetch('https://online-learning-platform-server-sit.vercel.app/courses'),
           Component: AllCourses 
         },
         {
@@ -54,12 +54,12 @@ const router = createBrowserRouter([
         },
         {
           path: '/certificate/:id',
-          loader: ()=> fetch('http://localhost:4000/courses'),
+          loader: ()=> fetch('https://online-learning-platform-server-sit.vercel.app/courses'),
           Component: CertificateDownload
         },
         {
           path: '/details/:id',
-          loader: ()=> fetch('http://localhost:4000/courses'),
+          loader: ()=> fetch('https://online-learning-platform-server-sit.vercel.app/courses'),
           element: <PrivateRoutes>
             <CoursesDetails/>
           </PrivateRoutes>
