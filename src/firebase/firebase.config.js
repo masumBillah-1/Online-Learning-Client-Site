@@ -1,16 +1,13 @@
-
+// src/firebase/firebase.config.js
 import { initializeApp } from "firebase/app";
 
 import { getAuth } from "firebase/auth";
 
 
-// 🔍 Debug: Check if env variables are loading
-console.log("ENV Check:", {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  all: import.meta.env
-});
 
-const firebaseConfig = {
+
+
+ const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
@@ -19,8 +16,9 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
-console.log("Firebase Config:", firebaseConfig);
+
 
 const app = initializeApp(firebaseConfig);
+
 
 export const auth = getAuth(app);

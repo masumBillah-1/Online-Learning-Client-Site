@@ -43,14 +43,14 @@ const Login = () => {
 
     //  Sign in
     signInUser(email, password)
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
+        // console.log(result.user);
         form.reset();
         toast.success('Login successful!');
         navigate(location.state || '/');
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
 
         //  Toast-based error handling
         if (error.code === 'auth/invalid-credential') {

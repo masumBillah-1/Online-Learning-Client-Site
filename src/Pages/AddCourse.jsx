@@ -1,7 +1,8 @@
-// src/Pages/AddCourse.jsx
 import React, { useState } from "react";
 import axios from "axios";
 import { toast, Toaster } from "react-hot-toast";
+
+const API_URL = import.meta.env.VITE_API_URL;
 
 const AddCourse = () => {
   // form states
@@ -26,9 +27,8 @@ const AddCourse = () => {
       instructorImage: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d",
     };
 
-    // Toast.promise ব্যবহার করে লোডিং, সাকসেস এবং এরর দেখানো
     toast.promise(
-      axios.post("http://localhost:4000/courses", courseData),
+      axios.post(`${API_URL}/courses`, courseData),
       {
         loading: "Adding course...",
         success: "Course added successfully!",
@@ -44,11 +44,11 @@ const AddCourse = () => {
         setImage("");
         setDescription("");
       }
-    }).catch((err) => {
-      console.error(err);
+    }).catch(() => {
+      // Silent fail
     });
   };
-
+  
   return (
     <div className="py-20">
       <title>Add Course</title>

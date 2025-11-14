@@ -51,7 +51,7 @@ const CoursesDetails = () => {
         { title: "Ecommerce and analytics (Update 3.0)", duration: "55 Min" },
     ];
 
-    console.log(user)
+    // console.log(user)
 
 
     const handelCourseModelOpen =()=> {
@@ -62,7 +62,7 @@ const CoursesDetails = () => {
     }
 
 
-const handleCoursePurchase = (e) => {
+const handleCoursePurchase = async (e) => {
   e.preventDefault();
 
   const name = e.target.name.value;
@@ -76,18 +76,21 @@ const handleCoursePurchase = (e) => {
     price: price
   };
 
-  fetch('http://localhost:4000/purchases', {
-    method: "POST",
-    headers: {
-      'content-type': 'application/json' 
-    },
-    body: JSON.stringify(courseData)
-  })
-  .then(res => res.json())
-  .then(data => {
-    console.log("After Courses Data", data);
+  const API_URL = import.meta.env.VITE_API_URL;
 
-    // 🟢 Swal.fire দেখানো হবে
+  try {
+    const response = await fetch(`${API_URL}/purchases`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify(courseData)
+    });
+
+    if (!response.ok) throw new Error('Purchase failed');
+
+    await response.json();
+
     Swal.fire({
       title: "Success!",
       text: "Course purchased successfully.",
@@ -95,22 +98,17 @@ const handleCoursePurchase = (e) => {
       confirmButtonText: "OK"
     });
 
-    // Modal close
     courseModelRef.current.close();
-  })
-  .catch(err => {
-    console.error(err);
+    
+  } catch {
     Swal.fire({
       title: "Error!",
       text: "Something went wrong. Please try again.",
       icon: "error",
       confirmButtonText: "OK"
     });
-  });
-
-  console.log(name, email, price, singlecourse._id);
+  }
 };
-    
     return (
         <div className='' style={{background: 'linear-gradient(to right, #0a1c4a, #193485)'}}>
             <div className="w-10/12 mx-auto py-20">

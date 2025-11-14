@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 const CourseCard = ({ course }) => {
   const { _id = '', level = '', title = '', lessons = 0, students = 0, duration = '' } = course || {};
 
-  console.log(_id)
+  // console.log(_id)
 
   return (
     <div className="group bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20 hover:border-white/40 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/20 hover:-translate-y-2">

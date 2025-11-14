@@ -49,7 +49,7 @@ const Register = () => {
 
         createUser(email, password)
             .then(result => {
-                console.log(result.user);
+                // console.log(result.user);
                 const user = result.user;
                 
                 updateUser({ displayName: name, photoURL: photo })
@@ -62,14 +62,14 @@ const Register = () => {
                         //     navigate('/');
                         // }, 2000);
                     })
-                    .catch(error => {
-                        console.log(error);
+                    .catch(() => {
+                        // console.log(error);
                         setUser(user);
                         toast.error('Profile update failed, but account created');
                     });
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
                 
                 if (error.code === 'auth/email-already-in-use') {
                     toast.error('This email is already registered');
@@ -88,39 +88,38 @@ const Register = () => {
 
 
 
-    const handleGoogleSignIn = () => {
-          signinWidthGoogle()
-            .then(result => {
+const handleGoogleSignIn = async () => {
+  try {
+    const result = await signinWidthGoogle();
+    
+    const newUser = {
+      name: result.user.displayName,
+      email: result.user.email,
+      image: result.user.photoURL
+    };
 
-           const   newUser = {
-                name: result.user.displayName,
-                email: result.user.email,
-                image: result.user.photoURL
-              }
-              // create user in the database
-              fetch('http://localhost:4000/users/', {
+    // Save user to database
+    const API_URL = import.meta.env.VITE_API_URL;
+    
+    try {
+      await fetch(`${API_URL}/users`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newUser)
+      });
+    } catch {
+      // Silently fail - user still logged in
+    }
 
-                  method: 'POST',
-                  headers: {
-                    'content-type': 'application/json'
-                  },
-                  body: JSON.stringify(newUser)
-              })
-              .then(res=> res.json())
-              .then(data => {
-                console.log('data after save',data)
-              })
-
-
-
-              toast.success('Login successful with Google!');
-              navigate(location?.state || '/');
-            })
-            .catch(() => {
-              toast.error('Failed to sign in with Google. Please try again.');
-            });
+    toast.success('Login successful with Google!');
+    navigate(location?.state || '/');
+    
+  } catch {
+    toast.error('Failed to sign in with Google. Please try again.');
+  }
 };
-
 
     const handleTogglepassword = (e) => {
         e.preventDefault();

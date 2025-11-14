@@ -26,12 +26,12 @@ const Footer = () => {
 
     const handleSubscribe = () => {
         // Newsletter subscription logic
-        console.log('Subscribed:', email);
+        // console.log('Subscribed:', email);
         setEmail('');
     };
 
     return (
-        <footer className="relative bg-gradient-to-br from-[#1a3689] via-[#0f2454] to-[#030d28] text-white overflow-hidden">
+        <footer className="relative bg-linear-to-br from-[#1a3689] via-[#0f2454] to-[#030d28] text-white overflow-hidden">
             {/* Animated Background */}
             <div className="absolute inset-0 opacity-10">
                 <div className="absolute top-0 left-0 w-96 h-96 bg-blue-400 rounded-full blur-3xl animate-pulse"></div>

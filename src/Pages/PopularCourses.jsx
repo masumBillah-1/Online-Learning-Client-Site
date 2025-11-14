@@ -6,7 +6,7 @@ import { Link } from "react-router";
 const PopularCourses = ({coursedata}) => {
 
 
-  console.log(coursedata)
+  // console.log(coursedata)
   // const courses = [
   //   { 
   //     id: 1, 

@@ -8,23 +8,31 @@ const MyCourses = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (!user?.email) return;
-
-    const fetchMyCourses = async () => {
-      try {
-        const res = await fetch(`http://localhost:4000/purchases?email=${user.email}`);
-        const data = await res.json();
-        setCourses(data);
-      } catch (error) {
-        console.error("Error fetching courses:", error);
-      } finally {
-        setLoading(false);
+useEffect(() => {
+  if (!user?.email) return;
+  
+  const fetchMyCourses = async () => {
+    setLoading(true);
+    
+    try {
+      const API_URL = import.meta.env.VITE_API_URL;
+      const res = await fetch(`${API_URL}/purchases?email=${user.email}`);
+      
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
       }
-    };
-
-    fetchMyCourses();
-  }, [user]);
+      
+      const data = await res.json();
+      setCourses(data);
+    } catch {
+      setCourses([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  fetchMyCourses();
+}, [user]);
 
   if (!user) {
     return (

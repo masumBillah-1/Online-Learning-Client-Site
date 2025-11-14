@@ -12,7 +12,7 @@ const Navbar = () => {
   const handleSignOut = () => {
     SignOutUser()
       .then(() => {})
-      .catch((error) => console.log(error));
+      .catch(() =>{});
   };
 
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
