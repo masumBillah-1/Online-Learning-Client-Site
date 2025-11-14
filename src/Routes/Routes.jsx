@@ -14,85 +14,71 @@ import CertificateDownload from "../Pages/CertificateDownload";
 import PrivateRoutes from "./PrivateRoutes";
 import ErrorPage from "../Pages/ErrorPage";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
-    Component: Root,
+    element: <Root />,
     children: [
-        {
-            index: true,
-            loader: ()=> fetch('https://online-learning-platform-server-sit.vercel.app/latest-courses'),
-            Component: Homepage
-        },
-        {
-          path:"/allcourses",
-          loader: ()=> fetch('https://online-learning-platform-server-sit.vercel.app/courses'),
-          Component: AllCourses 
-        },
-        {
-          path: '/dashboard',
-          element: <PrivateRoutes>
-            <Dashboard/>
-          </PrivateRoutes>
-        },
-        {
-          path: '/dashboard/overview',
-          Component: Overview
-        },
-        {
-          path: '/dashboard/mycourses',
-          Component: MyCourses
-        },
-        {
-          path: '/addcourses',
-          element:<PrivateRoutes>
-            <AddCourse/>
-
-          </PrivateRoutes>
-          
-        },
-        {
-          path: '/certificate/:id',
-          loader: ()=> fetch('https://online-learning-platform-server-sit.vercel.app/courses'),
-          Component: CertificateDownload
-        },
-        {
-          path: '/details/:id',
-          loader: ()=> fetch('https://online-learning-platform-server-sit.vercel.app/courses'),
-          element: <PrivateRoutes>
-            <CoursesDetails/>
-          </PrivateRoutes>
-          
-        },
-        {
-          path: '/mycourses',
-          element: <PrivateRoutes>
-            <MyCourses/>
-          </PrivateRoutes>
-        },
-        {
-          path: '/dashboard/students',
-          Component: Students
-        },
-        {
-          path:"/login",
-          Component:Login
-        },
-        {
-          path:"/register",
-          Component: Register
-
-        },
-        {
-          path: "*",
-          Component: ErrorPage
-        }
-
+      {
+        index: true,
+        loader: () => fetch('https://online-learning-platform-server-sit.vercel.app/latest-courses'),
+        element: <Homepage />
+      },
+      {
+        path: "/allcourses",
+        loader: () => fetch('https://online-learning-platform-server-sit.vercel.app/courses'),
+        element: <AllCourses />
+      },
+      {
+        path: '/dashboard',
+        element: <PrivateRoutes><Dashboard /></PrivateRoutes>,
+        children: [
+          {
+            path: 'overview',
+            element: <Overview />
+          },
+          {
+            path: 'mycourses',
+            element: <MyCourses />
+          },
+          {
+            path: 'students',
+            element: <Students />
+          }
+        ]
+      },
+      {
+        path: '/addcourses',
+        element: <PrivateRoutes><AddCourse /></PrivateRoutes>
+      },
+      {
+        path: '/certificate/:id',
+        loader: () => fetch('https://online-learning-platform-server-sit.vercel.app/courses'),
+        element: <CertificateDownload />
+      },
+      {
+        path: '/details/:id',
+        loader: () => fetch('https://online-learning-platform-server-sit.vercel.app/courses'),
+        element: <PrivateRoutes><CoursesDetails /></PrivateRoutes>
+      },
+      {
+        path: '/mycourses',
+        element: <PrivateRoutes><MyCourses /></PrivateRoutes>
+      },
+      {
+        path: "/login",
+        element: <Login />
+      },
+      {
+        path: "/register",
+        element: <Register />
+      },
+      {
+        path: "*",
+        element: <ErrorPage />
+      }
     ]
-    
-  },
+  }
 ]);
 
-
-export default router
+export default router;
