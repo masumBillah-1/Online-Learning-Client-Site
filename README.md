@@ -1,10 +1,10 @@
-# EduWave – Online Learning Platform
+# 🎓 EduWave – Online Learning Platform
 
 A full-stack online learning platform where instructors can create and manage courses, and learners can explore, enroll, and track their learning journey. Designed with a modern UI, smooth animations, and secure authentication.
 
-🌍 **Live Website:** [https://your-live-link-here](https://your-live-link-here)  
-💻 **Client GitHub Repo:** [https://github.com/your-client-repo](https://github.com/your-client-repo)  
-🛠️ **Server GitHub Repo:** [https://github.com/your-server-repo](https://github.com/your-server-repo)
+🌍 **Live Website:** [https://your-live-link-here](https://creative-starlight-fc1735.netlify.app/)  
+💻 **Client GitHub Repo:** [https://github.com/your-client-repo](https://github.com/masumBillah-1/Online-Learning-Client-Site)  
+🛠️ **Server GitHub Repo:** [https://github.com/your-server-repo](https://github.com/masumBillah-1/Online-Learning-Server-Site)
 
 ---
 
